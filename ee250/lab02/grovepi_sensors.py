@@ -25,18 +25,25 @@ sys.path.append('../../Software/Python/')
 sys.path.append('../../Software/Python/grove_rgb_lcd')
 
 import grovepi
+from grove_rgb_lcd import *
 
 """This if-statement checks if you are running this python file directly. That 
 is, if you run `python3 grovepi_sensors.py` in terminal, this if-statement will 
 be true"""
 if __name__ == '__main__':
     PORT = 4    # D4
-
+    ROTARY = 2  #A2
     while True:
         #So we do not poll the sensors too quickly which may introduce noise,
         #sleep for a reasonable time of 200ms between each iteration.
         time.sleep(0.2)
-
-        print(grovepi.ultrasonicRead(PORT))
-        setText("EE250")
-        setRGB(0, 0, 255)
+        #setRGB(0, 155, 255)
+        thresh = grovepi.analogRead(ROTARY)
+        dist = grovepi.ultrasonicRead(PORT)
+        
+        if dist<=thresh:
+            setText_norefresh(str(thresh) + "cm OBJ PRES\n" + str(dist) + "cm")
+            setRGB(255, 0, 0)
+        else:
+            setText_norefresh(str(thresh) + "cm         \n" + str(dist) + "cm")
+            setRGB(0, 255, 0)
