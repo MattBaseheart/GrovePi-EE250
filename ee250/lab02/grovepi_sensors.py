@@ -1,8 +1,10 @@
 """ EE 250L Lab 02: GrovePi Sensors
 
 List team members here.
+Matt Baseheart
 
 Insert Github repository link here.
+https://github.com/MattBaseheart/GrovePi-EE250
 """
 
 """python3 interpreters in Ubuntu (and other linux distros) will look in a 
@@ -36,3 +38,5 @@ if __name__ == '__main__':
         time.sleep(0.2)
 
         print(grovepi.ultrasonicRead(PORT))
+        setText("EE250")
+        setRGB(0, 0, 255)
